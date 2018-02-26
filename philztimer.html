@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html height="100%">
+     <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <!--<script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>-->
+         <script type="text/javascript" src="easytimer.min.js"></script> 
+          <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+     </head>
+     <body height="100%">
+          <div id="chronoExample">
+              <div class="values">0</div>
+              <div>
+                  <button class="startButton">Start</button>
+                  <button class="pauseButton" >Pause</button>
+                  <button class="stopButton">Stop</button>
+                  <button class="resetButton">Reset</button>
+              </div>
+          </div>
+          <iframe width="100%" height="1000" src="https://docs.google.com/forms/d/e/1FAIpQLSdHFh_KfPV2_4ByGR8505INLtUwF19xksLks0xV6bEO06WwlQ/viewform"></iframe>
+          <script type="text/javascript">
+               var update = function(time) {
+                    $('#chronoExample .values').html(time);
+                    document.title = time
+               }
+               var timer = new Timer();
+               $('#chronoExample .startButton').click(function () {
+                   timer.start();
+               });
+               $('#chronoExample .pauseButton').click(function () {
+                   timer.pause();
+               });
+               $('#chronoExample .stopButton').click(function () {
+                   timer.stop();
+               });
+               $('#chronoExample .resetButton').click(function () {
+                   timer.reset();
+               });
+               timer.addEventListener('secondsUpdated', function (e) {
+               //    $('#chronoExample .values').html(timer.getTotalTimeValues().seconds);
+               
+                    update(timer.getTotalTimeValues().seconds)
+               });
+               timer.addEventListener('started', function (e) {
+                    update(timer.getTotalTimeValues().seconds)
+               });
+               timer.addEventListener('reset', function (e) {
+                    update(timer.getTotalTimeValues().seconds)
+               });
+          </script>
+     </body>
+</html>
